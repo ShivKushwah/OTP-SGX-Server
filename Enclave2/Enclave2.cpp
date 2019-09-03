@@ -41,7 +41,7 @@
 
 #define UNUSED(val) (void)(val)
 
-char* OTP_SECRET;
+char* OTP_SECRET = NULL;
 
 std::map<sgx_enclave_id_t, dh_session_t>g_src_session_info_map;
 
@@ -358,7 +358,7 @@ static uint32_t e2_foo1_wrapper(ms_in_msg_exchange_t *ms,
 }
 
 uint32_t generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
-    if (strlen(OTP_SECRET) > 0 && return_otp_str_len >= strlen(OTP_SECRET)) {
+    if (OTP_SECRET != NULL && strlen(OTP_SECRET) > 0 && return_otp_str_len >= strlen(OTP_SECRET)) {
         strncpy(return_otp_str, OTP_SECRET, strlen(OTP_SECRET));
         return_otp_str[strlen(OTP_SECRET)] = '\0';
         return 1;
