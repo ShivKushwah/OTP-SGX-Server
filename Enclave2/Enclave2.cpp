@@ -41,6 +41,8 @@
 
 #define UNUSED(val) (void)(val)
 
+char* OTP_SECRET;
+
 std::map<sgx_enclave_id_t, dh_session_t>g_src_session_info_map;
 
 static uint32_t e2_foo1_wrapper(ms_in_msg_exchange_t *ms, size_t param_lenth, char** resp_buffer, size_t* resp_length);
@@ -311,7 +313,11 @@ extern "C" uint32_t message_exchange_response_generator(char* decrypted_data,
     if(umarshal_message_exchange_request3(inp_really_secret_data,ms) != SUCCESS)
         return ATTESTATION_ERROR;
     ocall_print("\nENCLAVE2 RECEIVED MESSAGE: ");
-    ocall_print(inp_really_secret_data);
+
+    OTP_SECRET = (char*) malloc(strlen(inp_really_secret_data) + 1);
+    strncpy(OTP_SECRET, inp_really_secret_data, strlen(inp_really_secret_data));
+    OTP_SECRET[strlen(inp_really_secret_data)] = '\0';
+    ocall_print(OTP_SECRET);
 
     out_secret_data = get_message_exchange_response(inp_secret_data);
 
