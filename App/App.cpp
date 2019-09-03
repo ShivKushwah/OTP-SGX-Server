@@ -91,6 +91,7 @@ uint32_t load_enclaves()
 int _tmain(int argc, _TCHAR* argv[])
 {
     uint32_t ret_status;
+    long ret_status_long;
     sgx_status_t status;
 
     UNUSED(argc);
@@ -223,12 +224,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
             char* otp_code = (char*) malloc(10);
 
-            status = Enclave2_generate_OTP_from_secret(e2_enclave_id, &ret_status, otp_code, 10);
+            status = Enclave2_generate_OTP_from_secret(e2_enclave_id, &ret_status_long, otp_code, 10);
             if (status!=SGX_SUCCESS)
             {
                 printf("Enclave2_test_create_session Ecall failed: Error code is %x", status);
                 break;
             }
+            printf("%ld", ret_status_long);
             if (ret_status == 1) {
                 printf("Enclave2 Generated OTP Code: ");
                 printf(otp_code);
@@ -237,7 +239,7 @@ int _tmain(int argc, _TCHAR* argv[])
                 printf("Enclave2: OTP Secret not initialized correctly\n");
             }
             
-
+            /*
             printf("\n");
                 printf("\n");
                 printf("ENCLAVE2 Sending Pong---------\n");
@@ -302,6 +304,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     }
                 }
                 printf("\n");
+                */
 
 
         } else {

@@ -357,12 +357,35 @@ static uint32_t e2_foo1_wrapper(ms_in_msg_exchange_t *ms,
     return SUCCESS;
 }
 
-uint32_t generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
+unsigned long
+hash(const unsigned char *str)
+{
+    unsigned long hash = 5381;
+    int c;
+
+    while (c = *str++)
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+    return hash;
+}
+
+long generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
     if (OTP_SECRET != NULL && strlen(OTP_SECRET) > 0 && return_otp_str_len >= strlen(OTP_SECRET)) {
         strncpy(return_otp_str, OTP_SECRET, strlen(OTP_SECRET));
+        //get current time
+        const unsigned char* kirat1 = reinterpret_cast<const unsigned char *>("kirat");
+        long kirat = hash(kirat1);
+        // char k[20];
+        // sprintf(k, "%l", kirat);
+        ocall_print("YEET");
+        // ocall_print(k);
+
         return_otp_str[strlen(OTP_SECRET)] = '\0';
-        return 1;
+        return kirat;
+
     } else {
         return 0;
     }
 }
+
+

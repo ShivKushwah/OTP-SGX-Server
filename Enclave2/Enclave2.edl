@@ -38,7 +38,7 @@ enclave {
             public uint32_t test_enclave_to_enclave_call(sgx_enclave_id_t src_enclave_id, sgx_enclave_id_t dest_enclave_id);
             public uint32_t test_message_exchange(sgx_enclave_id_t src_enclave_id, sgx_enclave_id_t dest_enclave_id, [in, string] char* message, int messagelen);
             public uint32_t test_close_session(sgx_enclave_id_t src_enclave_id, sgx_enclave_id_t dest_enclave_id);
-            public uint32_t generate_OTP_from_secret([out, size=10] char* return_otp_str, int return_otp_str_len);
+            public long generate_OTP_from_secret([out, size=10] char* return_otp_str, int return_otp_str_len);
 
     };
     untrusted {
