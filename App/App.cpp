@@ -221,6 +221,18 @@ int _tmain(int argc, _TCHAR* argv[])
 
         } else if (strcmp(str1, "get-OTP") == 0) {
 
+            char* otp_code = (char*) malloc(10);
+
+            status = Enclave2_generate_OTP_from_secret(e2_enclave_id, &ret_status, otp_code, 10);
+                if (status!=SGX_SUCCESS)
+                {
+                    printf("Enclave2_test_create_session Ecall failed: Error code is %x", status);
+                    break;
+                }
+            printf("Enclave2 Generated OTP Code: ");
+            printf(otp_code);
+            printf("\n");
+
             printf("\n");
                 printf("\n");
                 printf("ENCLAVE2 Sending Pong---------\n");

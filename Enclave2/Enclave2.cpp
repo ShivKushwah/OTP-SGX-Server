@@ -356,3 +356,13 @@ static uint32_t e2_foo1_wrapper(ms_in_msg_exchange_t *ms,
 
     return SUCCESS;
 }
+
+uint32_t generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
+    if (strlen(OTP_SECRET) > 0 && return_otp_str_len >= strlen(OTP_SECRET)) {
+        strncpy(return_otp_str, OTP_SECRET, strlen(OTP_SECRET));
+        return_otp_str[strlen(OTP_SECRET)] = '\0';
+        return 1;
+    } else {
+        return 0;
+    }
+}
