@@ -293,9 +293,6 @@ int _tmain(int argc, _TCHAR* argv[])
     }
 
 
-       
-
-
     sgx_destroy_enclave(e1_enclave_id);
     sgx_destroy_enclave(e2_enclave_id);
 
