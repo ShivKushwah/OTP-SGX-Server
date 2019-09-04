@@ -550,8 +550,8 @@ uint32_t generate_otp_secret(char* returnstr, int returnstr_len) {
         ocall_print(random_str);
 
         
-        strncpy(returnstr, "123456789", 9);
-        returnstr[10] = '\0';
+        strncpy(returnstr, random_str, strlen(random_str));
+        returnstr[strlen(random_str)] = '\0';
         return 1;
     }
 
