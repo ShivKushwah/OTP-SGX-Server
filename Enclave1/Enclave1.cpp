@@ -534,6 +534,22 @@ uint32_t generate_otp_secret(char* returnstr, int returnstr_len) {
     if (returnstr_len < 10) {
         return 0;
     } else {
+        // char* rand = (char*) malloc(20);
+        unsigned char rand_array[4];
+        int random_int = 0;
+        sgx_read_rand(rand_array, 4);
+        random_int = *(int *)&rand_array[0];
+        if (random_int < 0) {
+            random_int = random_int * -1;
+        }
+        ocall_print("KIRAT");
+        ocall_print_int(random_int);
+
+        char random_str[15];
+        convert_int_to_string(random_int, random_str);
+        ocall_print(random_str);
+
+        
         strncpy(returnstr, "123456789", 9);
         returnstr[10] = '\0';
         return 1;
