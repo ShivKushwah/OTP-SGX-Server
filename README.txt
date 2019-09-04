@@ -1,13 +1,13 @@
 Original Documentation at : https://github.com/ShivKushwah/password-manager
-Includes "send" command which allows for secure message sending between the 2 local enclaves. 
+OTP-Server Implementation
+Implements OTP server in https://people.eecs.berkeley.edu/~sseshia/pubdir/ccs15-moat.pdf
+You can "create-account" which generates the OTP secret key and transfers it from the Bank enclave to the client enclave and "get-OTP" which generates the OTP code from the client enclave by hashing the current time and the OTP secret key.
 
-SECURE MESSAGE SENDING in Intel SGX Enclaves
-
-Enclave 1 local attests Enclave 2 and then creates a diffie hellman session
-Sends user defined message.
-If user message = "ping", then
-Enclave 2 local attests Enclave 2 and then creates its own diffie hellman session
-Sends “pong”
+--Example Usage--
+source /home/shiv/Research/Intel-SGX-Installation/linux-sgx/linux/installer/bin/sgxsdk/environment
+make SGX_MODE=SIM
+./app
+Video Demo at https://youtu.be/dpkI3GsSuGU
 
 ---Sample Code Description Below---
 ---------------------------
