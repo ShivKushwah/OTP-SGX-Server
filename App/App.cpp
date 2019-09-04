@@ -33,6 +33,7 @@
 // App.cpp : Defines the entry point for the console application.
 #include <stdio.h>
 #include <map>
+#include <time.h>
 #include "../Enclave1/Enclave1_u.h"
 #include "../Enclave2/Enclave2_u.h"
 #include "sgx_eid.h"
@@ -59,6 +60,24 @@ sgx_enclave_id_t e2_enclave_id = 0;
 
 void ocall_print(const char* str) {
     printf("%s\n", str);
+}
+
+void ocall_print_int(int str) {
+    printf("%d\n", str);
+}
+
+void bro(char* kirat) {
+    kirat[0] = 'a';
+    kirat[1] = '\0';
+}
+
+void convert_int_to_string(int convert_int, char* return_string) {
+    sprintf(return_string, "%d", convert_int);
+}
+
+int get_current_time() {
+    time_t now = time(0);
+    return now;
 }
 
 uint32_t load_enclaves()
