@@ -45,7 +45,6 @@ enclave {
         /* define OCALLs here. */
         void ocall_print([in, string]const char* str);
         void ocall_print_int(int str);
-        void bro([out, size=20]char* kirat);
         void convert_int_to_string(int convert_int, [out, size=15]char* return_string);
         int get_current_time();
 

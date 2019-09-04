@@ -66,11 +66,6 @@ void ocall_print_int(int str) {
     printf("%d\n", str);
 }
 
-void bro(char* kirat) {
-    kirat[0] = 'a';
-    kirat[1] = '\0';
-}
-
 void convert_int_to_string(int convert_int, char* return_string) {
     sprintf(return_string, "%d", convert_int);
 }

@@ -359,7 +359,7 @@ static uint32_t e2_foo1_wrapper(ms_in_msg_exchange_t *ms,
 
 unsigned long
 hash(const unsigned char *str)
-{
+{ //TODO verify this hash actually works
     unsigned long hash = 5381;
     int c;
 
@@ -372,20 +372,8 @@ hash(const unsigned char *str)
 long generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
     if (OTP_SECRET != NULL && strlen(OTP_SECRET) > 0 && return_otp_str_len >= strlen(OTP_SECRET)) {
         strncpy(return_otp_str, OTP_SECRET, strlen(OTP_SECRET));
-        //get current time
-        // sgx_time_t current_time;
-        // sgx_time_source_nonce_t time_source_nonce;
-        // sgx_get_trusted_time(&current_time, &time_source_nonce);
 
         int otp_secret_len = strlen(OTP_SECRET);
-        char harkirat[20];
-        bro(harkirat);
-        if (harkirat[0] == 'a') {
-            ocall_print("KKKKD");
-        }
-
-        
-
         // const unsigned char* kirat1 = reinterpret_cast<const unsigned char *>("kirat");
         int return_val;
         get_current_time(&return_val);
