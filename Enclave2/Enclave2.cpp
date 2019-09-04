@@ -386,7 +386,7 @@ long generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
 
         
 
-        const unsigned char* kirat1 = reinterpret_cast<const unsigned char *>("kirat");
+        // const unsigned char* kirat1 = reinterpret_cast<const unsigned char *>("kirat");
         int return_val;
         get_current_time(&return_val);
         // ocall_print_int(return_val);
@@ -395,6 +395,23 @@ long generate_OTP_from_secret(char* return_otp_str, int return_otp_str_len) {
         char time_str[15];
         convert_int_to_string(return_val, time_str);
         ocall_print(time_str);
+        int time_str_len = strlen(time_str);
+
+        char combined_time_and_secret[otp_secret_len + time_str_len + 1];
+        int current_index = 0;
+        for (int i = 0; i < otp_secret_len; i++) {
+            combined_time_and_secret[current_index] =  OTP_SECRET[i];
+            current_index++;
+        }
+        for (int i = 0; i < time_str_len; i++) {
+            combined_time_and_secret[current_index] =  time_str[i];
+            current_index++;
+        }
+        combined_time_and_secret[current_index] =  '\0';
+
+        const unsigned char* kirat1 = reinterpret_cast<const unsigned char *>(combined_time_and_secret);
+
+
 
         long kirat = hash(kirat1);
 
